@@ -1,0 +1,25 @@
+local repo registry-console-default.ow-svc.nfvdev.tlabs.ca/3scale-poc/image:tag
+if missing cluster admin role:
+as an admin:
+oc adm policy add-role-to-user cluster-admin t824907
+List of images:
+
+registry.redhat.io/3scale-amp2/backend-rhel7:3scale2.8
+registry.redhat.io/3scale-amp2/zync-rhel7:3scale2.8
+registry.redhat.io/3scale-amp2/apicast-gateway-rhel8:3scale2.8
+registry.redhat.io/3scale-amp2/system-rhel7:3scale2.8
+registry.redhat.io/3scale-amp2/memcached-rhel7:3scale2.8
+registry.redhat.io/redhat-sso-7/sso73-openshift (if RH SSO integration desired)
+
+from ow-ansible:
+docker login registry.redhat.io
+...
+docker pull...
+...
+...
+docker login docker-registry-default.ow-svc.nfvdev.tlabs.ca
+...
+docker tag registry.redhat.io/3scale-amp2/backend-rhel7:3scale2.8 docker-registry-default.ow-svc.nfvdev.tlabs.ca/3scale-poc/backend-rhel7:3scale2.8
+....
+...
+docker push docker-registry-default.ow-svc.nfvdev.tlabs.ca/3scale-poc/backend-rhel7:3scale2.8
